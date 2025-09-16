@@ -12,3 +12,8 @@ def select_all_users():
     cursor.execute("SELECT * FROM users")
     users = cursor.fetchall()
     return users
+
+def select_user_by_username(username):
+    cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
+    user = cursor.fetchone()
+    return user
