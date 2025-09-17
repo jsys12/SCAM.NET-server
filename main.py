@@ -1,11 +1,29 @@
 import fastapi
+from fastapi.middleware.cors import CORSMiddleware
 
+import random
+
+import hashlib
 # import html
 
 import sql
 
 
 app = fastapi.FastAPI()
+
+origins = [
+    "http://127.0.0.1:5500",  # если запускаешь HTML через Live Server / локальный порт
+    "http://localhost:5500",
+    "http://127.0.0.1:8000",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins + ['*'],          # откуда разрешаем запросы
+    allow_credentials=True,
+    allow_methods=["POST", "GET"],            # какие методы (GET, POST, …)
+    allow_headers=["Content-Type"],            # какие заголовки
+)
 
 
 @app.get("/")
@@ -22,6 +40,8 @@ async def insert_user(username: str, gmail: str , password: str):
 async def select_user(username: str):
     result = sql.select_user_by_username(username)
     return {"username": username, "result": result}
+
+
 
 #@app.get('/select_all_users/')
 #async def select_all_users():

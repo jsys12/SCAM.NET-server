@@ -1,11 +1,15 @@
 import sqlite3 as sql
 import json
+import hash
 
 connection = sql.connect("users.db")
 cursor = connection.cursor()
 
-def insert_user(username, gmail, password, ):
-    cursor.execute("INSERT INTO users (username, gmail, password) VALUES (?, ?, ?)", (username, gmail, password))
+def insert_user(username, gmail, password):
+    hash_param = hash.hash_password(password)
+    hash_pass= hash_param["h_pass"]
+    salt = hash_param["salt"]
+    cursor.execute("INSERT INTO users (username, gmail, hash_pass, salt) VALUES (?, ?, ?, ?)", (username, gmail, hash_pass, salt))
     connection.commit()
 
 def select_all_users():
