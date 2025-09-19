@@ -13,7 +13,7 @@ def insert_user(username, gmail, password):
     cursor.execute("INSERT INTO users (username, gmail, hash_pass, salt) VALUES (?, ?, ?, ?)", (username, gmail, hash_pass, salt))
     connection.commit()
 
-# def select_all_users():
+# def select_a ll_users():
 #     cursor.execute("SELECT * FROM users")
 #     users = cursor.fetchall()
 #     return users
