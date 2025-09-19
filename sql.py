@@ -18,6 +18,6 @@ def select_all_users():
     return users
 
 def select_user_by_username(username):
-    cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
+    cursor.execute("SELECT username, gmail, id FROM users WHERE username = ?", (username,))
     user = cursor.fetchone()
     return user
