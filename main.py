@@ -42,6 +42,11 @@ async def select_user(username: str):
     result = sql.select_user_by_username(username)
     return {"username": username, "result": result}
 
+@app.get('/select_user_password/')
+async def select_user(username: str, password: str):
+    result = sql.select_user_by_username_and_pass(username, password)
+    return {"username": username, "result": result}
+
 
 
 #@app.get('/select_all_users/')
