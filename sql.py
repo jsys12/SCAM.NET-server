@@ -13,10 +13,10 @@ def insert_user(username, gmail, password):
     cursor.execute("INSERT INTO users (username, gmail, hash_pass, salt) VALUES (?, ?, ?, ?)", (username, gmail, hash_pass, salt))
     connection.commit()
 
-def select_all_users():
-    cursor.execute("SELECT * FROM users")
-    users = cursor.fetchall()
-    return users
+# def select_all_users():
+#     cursor.execute("SELECT * FROM users")
+#     users = cursor.fetchall()
+#     return users
 
 def select_user_by_username(username):
     cursor.execute("SELECT username, gmail, id FROM users WHERE username = ?", (username,))
@@ -64,5 +64,5 @@ def validation_check(username, password, gmail):
         errors.append("Email уже зарегистрирован")
 
     if errors:
-        return {'valid': False, 'errors': errors}
-    return {'valid': True}
+        return False
+    return True
