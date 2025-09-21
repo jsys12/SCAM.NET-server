@@ -29,7 +29,7 @@ def select_user_by_username_and_pass(username, password):
     result = hash.chek_password(password, user[4], user[3])
     user[4] = str(user[4])
     if result:
-        return {"username": user[1], "gmail": user[2]}
+        return {"username": user[1], "gmail": user[2], "id": user[0]}
     else:
         return {"Error": "Password doesn't match"}\
 
