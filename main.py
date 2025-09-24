@@ -25,7 +25,7 @@ app.add_middleware(
     allow_origins=origins,          # откуда разрешаем запросы
     allow_credentials=True,
     allow_methods=["POST", "GET"],            # какие методы (GET, POST, …)
-    allow_headers=["Content-Type"],            # какие заголовки
+    allow_headers=["Content-Type", "Access-Control-Allow-Origin"],            # какие заголовки
 )
 
 
