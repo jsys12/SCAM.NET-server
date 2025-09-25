@@ -15,9 +15,9 @@ origins = [
     "http://127.0.0.1:5500",  # если запускаешь HTML через Live Server / локальный порт
     "http://localhost:5500",
     "http://127.0.0.1:8000",
-    "http://0.0.0.0:8000/",
-    "https://jsys12.github.io/SCAM.NET-site/",
-    "https://jsys12.github.io/"
+    "http://0.0.0.0:8000",
+    "https://jsys12.github.io/SCAM.NET-site",
+    "https://jsys12.github.io",
 ]
 
 app.add_middleware(
