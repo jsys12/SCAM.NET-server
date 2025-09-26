@@ -6,18 +6,19 @@ import random
 import hashlib
 # import html
 
-import sql
+import sql, auth_token
 
 
 app = fastapi.FastAPI()
 
 origins = [
-    "http://127.0.0.1:5500",  # если запускаешь HTML через Live Server / локальный порт
-    "http://localhost:5500",
-    "http://127.0.0.1:8000",
-    "http://0.0.0.0:8000",
-    "https://jsys12.github.io/SCAM.NET-site",
-    "https://jsys12.github.io",
+    # "http://127.0.0.1:5500",  # если запускаешь HTML через Live Server / локальный порт
+    # "http://localhost:5500",
+    # "http://127.0.0.1:8000",
+    # "http://0.0.0.0:8000",
+    # "https://jsys12.github.io/SCAM.NET-site",
+    # "https://jsys12.github.io",
+    "*"
 ]
 
 app.add_middleware(
@@ -28,6 +29,8 @@ app.add_middleware(
     allow_headers=["*"],            # какие заголовки
 )
 
+TOKEN_LIFE = 1 * 86400 #В секундах
+
 
 @app.get("/")
 async def root():
@@ -35,9 +38,12 @@ async def root():
 
 @app.get('/insert_user/')
 async def insert_user(username: str, gmail: str , password: str):
-
-    sql.insert_user(username, gmail, password)
-    return {"message": "User inserted successfully"}
+    if(sql.validation_check(username, password, gmail) == True):
+        token = auth_token.generate_token()
+        sql.insert_user(username, gmail, password, token, TOKEN_LIFE)
+        return {"message": "User inserted successfully", "token": token}
+    else:
+        return {"message": "User | gmail id db"}
 
 @app.get('/select_user/')
 async def select_user(username: str):
